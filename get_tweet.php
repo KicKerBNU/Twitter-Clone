@@ -14,8 +14,10 @@ $objDb = new db();
 $link = $objDb->conecta_mysql();
         
 $sql = "SELECT DATE_FORMAT(t.data_inclusao,'%d %b %Y %T') AS data_inclusao_formatada, 
-t.tweet, u.usuario FROM tweet AS t JOIN usuarios AS u ON (t.id_usuario = u.id) WHERE
- id_usuario = $id_usuario ORDER BY data_inclusao DESC";
+t.tweet, u.usuario FROM tweet AS t JOIN usuarios AS u ON (t.id_usuario = u.id)
+WHERE id_usuario = $id_usuario 
+OR id_usuario IN (SELECT seguindo_id_usuario FROM usuarios_seguidores WHERE id_usuario = $id_usuario)
+ORDER BY data_inclusao DESC";
  
 $resultado_id = mysqli_query($link,$sql);
 

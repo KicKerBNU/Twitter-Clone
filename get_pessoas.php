@@ -7,6 +7,7 @@ if(!isset($_SESSION['usuario'])){
 }
 
 require_once('db.class.php');
+
 $nome_pessoa = $_POST['nome_pessoa'];
 $id_usuario = $_SESSION['id_usuario'];
 
